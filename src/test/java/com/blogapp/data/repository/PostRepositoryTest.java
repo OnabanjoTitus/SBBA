@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -89,5 +91,18 @@ class PostRepositoryTest {
         List<Post>existingPosts=postRepository.findAll();
         assertThat(existingPosts).isNotNull();
         assertThat(existingPosts).hasSize(5);
+    }
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void deletePostTest(){
+        Post savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNotNull();
+        log.info("Post fetched from database -->{}",savedPost);
+        //delete post
+        postRepository.deleteById(41);
+
+        savedPost = postRepository.findById(41).orElse(null);
+        assertThat(savedPost).isNull();
     }
 }
