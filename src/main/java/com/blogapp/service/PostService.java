@@ -7,7 +7,7 @@ import com.blogapp.web.dto.PostDto;
 import java.util.List;
 
 public interface PostService {
-    Post addPost(PostDto postDto);
+    Post savePost(PostDto postDto);
 
     List<Post> findAllPost();
 

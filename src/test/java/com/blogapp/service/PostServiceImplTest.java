@@ -1,10 +1,15 @@
 package com.blogapp.service;
 
+import com.blogapp.data.models.Post;
 import com.blogapp.data.repository.PostRepository;
+import com.blogapp.web.dto.PostDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,12 +19,20 @@ class PostServiceImplTest {
     PostRepository postRepository;
 
     @InjectMocks
-    PostService postServiceimpl = new PostServiceImpl();
+    PostService postServiceImpl = new PostServiceImpl();
+    Post testPost;
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
+       testPost= new Post();
     }
 
-    @AfterEach
-    void tearDown() {
+
+    @Test
+    void whenTheSaveMethodIsCalled_thenRepositoryIsCalledOnceTest(){
+        when(postServiceImpl.savePost(new PostDto())).thenReturn(testPost);
+        postServiceImpl.savePost(new PostDto());
+
+        verify(postRepository,times(1)).save(testPost);
     }
 }
