@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity()
@@ -24,7 +25,7 @@ public class Post {
 
     private String coverImageUrl;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn
     private Author author;
 
@@ -34,6 +35,17 @@ public class Post {
     @UpdateTimestamp
     private LocalDate dateModified;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment>comment;
+
+    public void updateContent(String content){
+        this.content+=content;
+    }
+    public void addComment(Comment comment){
+        if(this.comment==null){
+            this.comment=new ArrayList<>();
+        }
+        this.comment.add(comment);
+    }
+
 }

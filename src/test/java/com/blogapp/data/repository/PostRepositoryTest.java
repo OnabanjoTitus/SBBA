@@ -1,6 +1,7 @@
 package com.blogapp.data.repository;
 
 import com.blogapp.data.models.Author;
+import com.blogapp.data.models.Comment;
 import com.blogapp.data.models.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -85,12 +86,14 @@ class PostRepositoryTest {
 
         postRepository.save(blogPost);
         log.info("Created a blog post-->{}",blogPost);
+
     }
     @Test
     void findAllPostInTheDbTest(){
         List<Post>existingPosts=postRepository.findAll();
         assertThat(existingPosts).isNotNull();
         assertThat(existingPosts).hasSize(5);
+
     }
     @Test
     @Transactional
@@ -105,4 +108,56 @@ class PostRepositoryTest {
         savedPost = postRepository.findById(41).orElse(null);
         assertThat(savedPost).isNull();
     }
+    @Test
+    @Transactional
+    void updatedSavedPostContentTest(){
+        Post savedPost = postRepository.findById(42).orElse(null);
+        assertThat(savedPost).isNotNull();
+        String oldContent=savedPost.getContent();
+
+        savedPost.updateContent(" This is me now");
+        postRepository.save(savedPost);
+        savedPost = postRepository.findById(42).orElse(null);
+        assertThat(savedPost).isNotNull();
+
+        assertNotEquals(oldContent,savedPost.getContent());
+
+        log.info("Post fetched from database -->{}",savedPost);
+
+    }
+    @Test
+    @Transactional
+    void updatePostAuthorTestAndAddComment(){
+        Post savedPost = postRepository.findById(42).orElse(null);
+        assertThat(savedPost).isNotNull();
+        assertThat(savedPost.getAuthor()).isNull();
+        log.info("Post fetched from database -->{}",savedPost);
+        Author author= new Author();
+        author.setLastName("Brown");
+        author.setFirstName("blue");
+        author.setPhoneNumber("0893000303");
+        author.setEmail("JBB@J.com");
+        author.setProfession("Software engineer");
+
+        savedPost.setAuthor(author);
+        postRepository.save(savedPost);
+
+        Post updatedPost=postRepository.findById(savedPost.getId()).orElse(null);
+        assertThat(updatedPost).isNotNull();
+        assertThat(updatedPost.getAuthor()).isNotNull();
+        assertThat(updatedPost.getAuthor().getLastName()).isEqualTo("Brown");
+        updatedPost.getAuthor().setLastName("Yellow");
+        postRepository.save(updatedPost);
+        log.info("Post fetched from database -->{}",updatedPost);
+
+        Comment comment= new Comment();
+        comment.setCommentatorName("Titus");
+        comment.setContent("Opoor");
+
+        updatedPost.addComment(comment);
+        postRepository.save(updatedPost);
+        updatedPost=postRepository.findById(savedPost.getId()).orElse(null);
+        log.info("Post fetched from database -->{}",updatedPost);
+    }
+
 }
