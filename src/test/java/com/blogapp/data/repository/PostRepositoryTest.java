@@ -127,6 +127,7 @@ class PostRepositoryTest {
     }
     @Test
     @Transactional
+    @Rollback(value = false)
     void updatePostAuthorTestAndAddComment(){
         Post savedPost = postRepository.findById(42).orElse(null);
         assertThat(savedPost).isNotNull();
@@ -158,6 +159,10 @@ class PostRepositoryTest {
         postRepository.save(updatedPost);
         updatedPost=postRepository.findById(savedPost.getId()).orElse(null);
         log.info("Post fetched from database -->{}",updatedPost);
+
+        Post commentedPost=postRepository.findById(savedPost.getId()).orElse(null);
+        assertThat(commentedPost).isNotNull();
+
     }
 
 }
