@@ -164,5 +164,31 @@ class PostRepositoryTest {
         assertThat(commentedPost).isNotNull();
 
     }
+    @Test
+    void findByTitle(){
+        Post blogPost=new Post();
+        blogPost.setTitle("What is Fintech?");
+        blogPost.setContent("This is fintech");
+        log.info("Created a blog post-->{}",blogPost);
 
+
+
+
+        Author author= new Author();
+        author.setFirstName("John");
+        author.setLastName("Wick");
+        author.setEmail("john@mail.com");
+        author.setPhoneNumber("090783838838");
+
+
+        //map relationships
+        blogPost.setAuthor(author);
+        author.addPost(blogPost);
+
+
+        postRepository.save(blogPost);
+        log.info("Created a blog post-->{}",blogPost);
+        Post findByTitle=postRepository.findByTitle("What is Fintech?");
+        assertThat(findByTitle.getTitle()).isEqualTo(blogPost.getTitle());
+    }
 }
