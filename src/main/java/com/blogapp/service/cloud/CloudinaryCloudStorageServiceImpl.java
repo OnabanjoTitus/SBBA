@@ -13,6 +13,7 @@ import java.util.Map;
 public class CloudinaryCloudStorageServiceImpl implements CloudStorageService {
     @Autowired
     Cloudinary cloudinary;
+
     @Override
     public Map<Object,Object> uploadImage(Map<Object, Object> imageProperties) throws IOException {
         cloudinary.uploader().upload(imageProperties.get("file"), ObjectUtils.emptyMap());
