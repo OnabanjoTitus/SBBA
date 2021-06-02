@@ -8,6 +8,6 @@ import java.net.URL;
 import java.util.Map;
 
 public interface CloudStorageService {
- Map<Object,Object> uploadImage(File file, Map<Object,Object> imageProperties) throws IOException;
- Map<Object,Object> uploadImage(MultipartFile multipartFile,Map<Object, Object> imageProperties) throws IOException;
+ Map<?,?> uploadImage(File file, Map<?,?> imageProperties) throws IOException;
+ Map<?,?> uploadImage(MultipartFile multipartFile,Map<?, ?> imageProperties) throws IOException;
 }

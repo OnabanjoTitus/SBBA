@@ -17,12 +17,12 @@ public class CloudinaryCloudStorageServiceImpl implements CloudStorageService {
     Cloudinary cloudinary;
 
     @Override
-    public Map<Object, Object> uploadImage(File file, Map<Object, Object> imageProperties) throws IOException {
+    public Map<?, ?> uploadImage(File file, Map<?, ?> imageProperties) throws IOException {
         return cloudinary.uploader().upload(file,imageProperties);
     }
 
     @Override
-    public Map<Object, Object> uploadImage(MultipartFile multipartFile, Map<Object, Object> imageProperties) throws IOException {
+    public Map<?, ?> uploadImage(MultipartFile multipartFile, Map<?, ?> imageProperties) throws IOException {
         return cloudinary.uploader().upload(multipartFile.getBytes(),imageProperties);
     }
 }
