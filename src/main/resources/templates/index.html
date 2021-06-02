@@ -70,10 +70,8 @@
                     <img th:src="@{asset/images/author-image1.jpg}" class="user-profile">
                     <a href="" class="user-name">Jen Lopez</a>
                 </a>
-
-                <p class="date-published" th:datetime="${post.dateCreated}"></p>
-
                 <a href="" class="actions">
+                    <p class="date-published" th:text="${post.dateCreated}"></p>
                     <p><i class="far fa-comment"></i></p>
                     <p><span class="comment-count">35</span> Comments</p>
                 </a>

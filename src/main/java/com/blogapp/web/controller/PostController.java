@@ -6,6 +6,7 @@ import com.blogapp.web.dto.PostDto;
 import com.blogapp.web.exceptions.PostObjectIsNullException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,14 +34,17 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public String savePost(@ModelAttribute @Valid PostDto postDto){
+    public String savePost(@ModelAttribute @Valid PostDto postDto, Model model){
 
         log.info("Post dto received-->{}",postDto );
         try{
             postServiceImpl.savePost(postDto);
         } catch (PostObjectIsNullException e) {
           log.info("Exception occurred -->{}",e.getMessage());
+        }catch(DataIntegrityViolationException dx){
+            model.addAttribute("error",dx.getMessage());
+            return "redirect:/posts/create";
         }
-        return "index";
+        return "redirect:/posts/";
     }
 }
