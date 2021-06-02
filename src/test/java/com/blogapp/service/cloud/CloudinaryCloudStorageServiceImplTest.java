@@ -34,7 +34,7 @@ class CloudinaryCloudStorageServiceImplTest {
         Map<Object,Object> params= new HashMap<>();
         params.put("file",file);
         try {
-            cloudStorageServiceImpl.uploadImage(params);
+            cloudStorageServiceImpl.uploadImage(file,params);
         }catch (IOException e){
             log.info("Error occurred -->{}",e.getMessage());
         }
