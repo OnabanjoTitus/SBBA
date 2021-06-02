@@ -43,7 +43,9 @@ public class PostController {
           log.info("Exception occurred -->{}",e.getMessage());
         }catch(DataIntegrityViolationException dx){
             model.addAttribute("error",dx.getMessage());
-            return "redirect:/posts/create";
+            model.addAttribute("errorMessage",dx.getMessage());
+            model.addAttribute("postDto",postDto);
+            return "create";
         }
         return "redirect:/posts/";
     }

@@ -44,9 +44,13 @@
      <!--Form-->
      <form th:action="@{/posts/save}" method="post" th:object="${postDto}" enctype="multipart/form-data">
         <h2>create a blog post</h2>
+
          <div class="mb-3">
              <label for="formFile" class="form-label">Default file input example</label>
              <input class="form-control" th:field="*{coverImageUrl}" type="file" id="formFile">
+         </div>
+         <div  th:if="${error}" role="alert">
+             <span th:text="${errorMessage}"></span>
          </div>
 
          <label for="text"></label><input type="text" th:field="*{title}"name="text" id="text" placeholder="Title">
