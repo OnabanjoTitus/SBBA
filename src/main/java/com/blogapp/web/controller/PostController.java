@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,9 +35,12 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public String savePost(@ModelAttribute @Valid PostDto postDto, Model model){
+    public String savePost(@ModelAttribute @Valid PostDto postDto, BindingResult result, Model model){
 
-        log.info("Post dto received-->{}",postDto );
+        log.info("Post dto received-->{}",postDto);
+        if(result.hasErrors()){
+            return "create";
+        }
         try{
             postServiceImpl.savePost(postDto);
         } catch (PostObjectIsNullException e) {
@@ -44,7 +48,7 @@ public class PostController {
         }catch(DataIntegrityViolationException dx){
             model.addAttribute("error",dx.getMessage());
             model.addAttribute("errorMessage",dx.getMessage());
-            model.addAttribute("postDto",postDto);
+            model.addAttribute("postDto",postDto);  
             return "create";
         }
         return "redirect:/posts/";

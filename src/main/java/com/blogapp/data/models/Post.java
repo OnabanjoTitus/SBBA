@@ -5,7 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Post {
     @Column(nullable = false,length = 50, unique = true)
     private String title;
 
-    @Column(length = 500)
+    @Column(length = 500,nullable = false)
     private String content;
 
     private String coverImageUrl;
@@ -30,10 +30,10 @@ public class Post {
     private Author author;
 
     @CreationTimestamp
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
 
     @UpdateTimestamp
-    private LocalDate dateModified;
+    private LocalDateTime dateModified;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment>comment;

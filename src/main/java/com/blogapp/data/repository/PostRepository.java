@@ -17,5 +17,6 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
 
 //    @Query("select p from Post p where p.title=?1")
 //    Post findByPostTitle(String title);
+    List<Post> findByOrderByDateCreatedDesc();
 
 }

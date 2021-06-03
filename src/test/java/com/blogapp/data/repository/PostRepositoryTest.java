@@ -191,4 +191,15 @@ class PostRepositoryTest {
         Post findByTitle=postRepository.findByTitle("What is Fintech?");
         assertThat(findByTitle.getTitle()).isEqualTo(blogPost.getTitle());
     }
+    @Test
+    void findAllThePostInDescTest(){
+        List<Post>allPost=postRepository.findByOrderByDateCreatedDesc();
+        assertThat(allPost).isNotEmpty();
+        log.info("All posts-->{}",allPost);
+        assertTrue(allPost.get(0).getDateCreated().isAfter(allPost.get(1).getDateCreated()));
+
+        allPost.forEach(post -> {log.info("The post created is -->{}",post.getDateCreated());});
+
+    }
+
 }

@@ -53,8 +53,12 @@
              <span th:text="${errorMessage}"></span>
          </div>
 
-         <label for="text"></label><input type="text" th:field="*{title}"name="text" id="text" placeholder="Title">
+         <label for="text"></label>
+         <span  class="ui-icon-alert" th:if="${#fields.hasErrors('title')}" th:error="*{title}"></span>
+         <input type="text" th:field="*{title}"name="text" id="text" placeholder="Title">
 
+         <label for="text"></label>
+         <span class="ui-icon-alert" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
         <textarea name="message" id="message" th:field="*{content}"cols="30" rows="10" placeholder="Post content here..."></textarea>
 
         <input type="submit" value="post your comment">
