@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" href="../static/asset/css/styles/nav.css">
-    <link rel="stylesheet" href="../static/asset/css/styles/footer.css">
-    <link rel="stylesheet" href="../static/asset/css/media-query/footer.css">
-    <link rel="stylesheet" href="../static/asset/css/media-query/nav.css">
-    <link rel="stylesheet" href="../css/media-query/style.css">
-    <link rel="stylesheet" href="../static/asset/css/styles/post.css">
-    <link rel="stylesheet" href="../static/asset/css/styles/blog-post.css">
-    <link rel="stylesheet" href="../static/asset/css/media-query/post.css">
+    <link rel="stylesheet"  th:href="@{/asset/css/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/blog-post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/home.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/blog-post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/post.css}">
     <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -23,24 +23,22 @@
 
 
     <!-- Navigation   -->
-    <nav>
-        <div class="logo">
-            <a href="/index.html">
-                <h1>PentaBlog</h1>
-            </a>
-            <div class="toggle">
-                <button>
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <div class="header">
+        <nav th:insert="/fragments.html :: topnav"></nav>
+        <header id="back-top">
+        <h1>Hello! This is PentaBlog.</h1>
+        <div class="flag">
+            <p>The </p>
+            <img th:src="@{asset/images/amazone.png}">
+            <p>of semicolon africa</p>
         </div>
+        <a href="#blog">
+            <button>Discover more</button>
+        </a>
 
-        <ul class="links">
-            <li><a href="/index.html">home</a></li>
-            <li><a href="create.html">post</a></li>
-            <li><a href="../static/asset/pages/register.html">register</a></li>
-        </ul>
-    </nav>
+        </header>
+        <!-- Header section end -->
+    </div>
     <!-- Navigation end   -->
 
     <!-- Post Container -->
@@ -51,38 +49,34 @@
 
     <!-- Post -->
 
-    <div class="blog-post-container">
-        <div class="blog-post">
-            <a href="#" class="post-title">We Help You Create Perfect Modern Design</a>
-            <div class="blog-post-detail">
-                <a class="user-detail">
-                    <img src="../static/asset/images/author-image1.jpg" class="user-profile">
-                    <a href="" class="user-name">Jen Lopez</a>
-                </a>
-
-                <p class="date-published"> July 22, 2017</p>
-
                 <a href="" class="actions">
                     <p><i class="far fa-comment"></i></p>
                     <p><span class="comment-count">35</span> Comments</p>
                 </a>
             </div>
             <div class="post-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
+                <div id="blog" class="blog-post-container">
+                    <div class="blog-post" >
+                        <a href="post.html" class="img-container">
+                            <img th:src="${post.coverImageUrl}" alt="blog-img">
+                        </a>
+                        <a href="post.html" class="post-title" th:text="${post.title}"></a>
+                        <div class="blog-post-detail">
+                            <a class="user-detail">
+                                <img th:src="@{asset/images/author-image1.jpg}" class="user-profile">
+                                <a href="" class="user-name">Jen Lopez</a>
+                            </a>
+                            <a href="" class="actions">
+                                <p class="date-published" th:text="${post.dateCreated}"></p>
+                                <p><i class="far fa-comment"></i></p>
+                                <p><span class="comment-count">35</span> Comments</p>
+                            </a>
+                        </div>
+                        <div class="post-content">
+                            <p th:text="${post.content}"></p>
+                        </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
+                    </div>
 
             <!-- Comment -->
         <div class="comment-container">
@@ -158,35 +152,7 @@
 
         
         <!-- Footer -->
-        <footer>
-            <div class="footer-flex">
-                <div class="footer-item studio">
-                    <h3>PentaBlog Studio</h3>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut
-                        labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                        <p>Copyright © 2021 Your Company - Design: Whalewalker </p>
-                    </div>
-                    <div class="footer-item">
-                        <h3>Talk to us</h3>
-                        <p> 312 Delicious Street, San Francisco, CA 10880</p>
-                        <p>09075617573</p>
-                        <p>ohida@gmail.com</p>
-                    </div>
-            </div>
-
-            <div class="media">
-                <button>
-                    <a href="#" class="fa fa-facebook"></a>
-                </button>
-                <button><a href="#" class="fa fa-twitter"></a></button>
-                <button>
-                    <a href="#" class="fa fa-google-plus"></a>
-                </button>
-                <button><a href="#" class="fa fa-dribbble"></a></button>
-                <button><a href="#" class="fa fa-linkedin"></a></button>
-            </div>
-        </footer>
+                <footer th:insert="/fragments.html :: footer"></footer>
         <!-- Footer -->
 
         <!-- Scripts -->

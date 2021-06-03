@@ -3,6 +3,7 @@ package com.blogapp.web.controller;
 import com.blogapp.data.models.Post;
 import com.blogapp.service.PostService;
 import com.blogapp.web.dto.PostDto;
+import com.blogapp.web.exceptions.PostNotFoundException;
 import com.blogapp.web.exceptions.PostObjectIsNullException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -32,6 +34,13 @@ public class PostController {
     public String getPostForm(Model model){
         model.addAttribute("postDto", new PostDto());
         return "create";
+    }
+    @GetMapping("/fullPost/{postId}")
+    public String getPostById(@PathVariable("postId") Integer id,Model model) throws PostNotFoundException {
+        log.info("Request for a post path -->{}",id);
+      Post post= postServiceImpl.findById(id);
+        model.addAttribute("post",post);
+        return "post";
     }
 
     @PostMapping("/save")

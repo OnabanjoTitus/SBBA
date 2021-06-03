@@ -30,6 +30,9 @@ class PostServiceImplTest {
         MockitoAnnotations.openMocks(this);
        testPost= new Post();
     }
+    private String extractFileName(String fileName){
+        return fileName.split("\\.")[0];
+    }
 
 
     @Test
