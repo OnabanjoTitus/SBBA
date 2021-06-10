@@ -7,7 +7,7 @@ import com.blogapp.web.exceptions.PostNotFoundException;
 import com.blogapp.web.exceptions.PostObjectIsNullException;
 
 import java.util.List;
-import java.util.Optional;
+
 
 public interface PostService {
     Post savePost(PostDto postDto) throws PostObjectIsNullException;
