@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class HomeController {
     @GetMapping("/")
     public  @ResponseBody String showWelcome(){
-        return "Welcome to pentax!!!!";
+        return "index";
     }
 
 }
