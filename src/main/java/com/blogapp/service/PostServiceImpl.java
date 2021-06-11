@@ -53,7 +53,7 @@ public class PostServiceImpl implements PostService {
         post.setContent(postDto.getContent());
         post.setTitle(postDto.getTitle());
 
-//        ModelMapper modelMapper= new ModelMapper();
+//        Mode/lMapper modelMapper= new ModelMapper();
 //        modelMapper.map(postDto,post);
         log.info("Post object after mapping -->{}",post);
         try{
