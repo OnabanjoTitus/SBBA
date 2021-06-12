@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity()
-@Table(name = "blog_post")
+@Entity(name = "blog_post")
+@Table()
 @Data
 public class Post {
     @Id
