@@ -12,7 +12,7 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post,Integer> {
     Post findByTitle(String title);
 
-    @Query("select p from Post p where p.title=:title")
+    @Query("select p from blog_post p where p.title=:title")
     Post findByPostTitle(@Param("title") String title);
 
 //    @Query("select p from Post p where p.title=?1")
