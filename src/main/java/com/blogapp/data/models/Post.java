@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity()
+@Entity
 @Table(name = "blog_post")
 @Data
 public class Post {
