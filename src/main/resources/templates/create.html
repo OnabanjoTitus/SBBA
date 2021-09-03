@@ -15,7 +15,8 @@
     <link rel="stylesheet" th:href="@{/asset/css/styles/post.css}">
     <link rel="stylesheet" th:href="@{/asset/css/media-query/post.css}">
     <link rel="stylesheet" th:href="@{/asset/css/styles/create.css}">
-    <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+  <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -44,6 +45,7 @@
      <!--Form-->
      <form th:action="@{/posts/save}" method="post" th:object="${postDto}" enctype="multipart/form-data">
         <h2>create a blog post</h2>
+
 
          <div class="mb-3">
              <label for="formFile" class="form-label">Default file input example</label>
@@ -103,6 +105,7 @@
 
     <!-- Scripts -->
     <script src="../static/asset/scripts/app.js"></script>
-</body>
+        <!-- JavaScript Bundle with Popper -->
+        </body>
 
 </html>

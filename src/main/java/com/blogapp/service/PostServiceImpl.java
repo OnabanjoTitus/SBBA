@@ -8,6 +8,7 @@ import com.blogapp.web.dto.PostDto;
 import com.blogapp.web.exceptions.PostNotFoundException;
 import com.blogapp.web.exceptions.PostObjectIsNullException;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class PostServiceImpl implements PostService {
         post.setContent(postDto.getContent());
         post.setTitle(postDto.getTitle());
 
-//        Mode/lMapper modelMapper= new ModelMapper();
+//        ModelMapper modelMapper= new ModelMapper();
 //        modelMapper.map(postDto,post);
         log.info("Post object after mapping -->{}",post);
         try{
